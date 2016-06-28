@@ -140,6 +140,97 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.alibaba.jstorm</groupId>
+            <artifactId>jstorm-core</artifactId>
+            <version>2.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.clojure</groupId>
+                    <artifactId>clojure</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-exec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>clj-time</groupId>
+                    <artifactId>clj-time</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>compojure</groupId>
+                    <artifactId>compojure</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>hiccup</groupId>
+                    <artifactId>hiccup</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ring</groupId>
+                    <artifactId>ring-devel</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ring</groupId>
+                    <artifactId>ring-jetty-adapter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.clojure</groupId>
+                    <artifactId>tools.logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.clojure</groupId>
+                    <artifactId>math.numeric-tower</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.twitter</groupId>
+                    <artifactId>carbonite</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.clojure</groupId>
+                    <artifactId>tools.cli</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.googlecode.disruptor</groupId>
+                    <artifactId>disruptor</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jgrapht</groupId>
+                    <artifactId>jgrapht-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jasig.cas.client</groupId>
+                    <artifactId>cas-client-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.opensaml</groupId>
+                    <artifactId>opensaml</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-slf4j-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--<dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-core</artifactId>
             <version>0.10.0-beta</version>
@@ -229,6 +320,6 @@
                     <artifactId>log4j-over-slf4j</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>

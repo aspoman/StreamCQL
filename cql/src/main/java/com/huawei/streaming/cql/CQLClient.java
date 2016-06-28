@@ -45,27 +45,27 @@ import com.huawei.streaming.exception.ErrorCode;
  */
 public class CQLClient
 {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(CQLClient.class);
-    
+
     private static final String DEFAULT_CLI_TIP = "Streaming>";
-    
+
     private static final String WAITING_INPUT_TIP = ">";
-    
+
     private static final String PRINTSTREAM_CHARSET = "UTF-8";
-    
+
     private static final String CQL_EXIT_CMD = "exit";
-    
+
     private static final String SUBMIT_COMMAND = "SUBMIT";
-    
+
     private static final String TEMP_FILE_FOR_SUSE = ".inputrc";
-    
+
     private static final int ERROR_EXIT_CODE = 1;
-    
+
     private CQLSessionState ss;
-    
+
     private Driver driver;
-    
+
     /**
      * 命令行客户端入口
      *
@@ -76,24 +76,24 @@ public class CQLClient
     {
         int result = CQLSessionState.STATE_OK;
         CQLClient client = new CQLClient();
-        
+
         result = client.initSessionState();
         if (result != CQLSessionState.STATE_OK)
         {
             System.exit(result);
         }
-        
+
         if (!client.parseArgs(args))
         {
             System.exit(CQLSessionState.STATE_NORMAL_EXIT);
         }
-        
+
         client.createTempFile();
-        
+
         result = client.executeDriver();
         System.exit(result);
     }
-    
+
     /**
      * 初始化用户session
      *
@@ -116,7 +116,7 @@ public class CQLClient
         }
         return 0;
     }
-    
+
     /**
      * 解析系统参数
      *
@@ -129,7 +129,7 @@ public class CQLClient
         OptionsProcessor processor = new OptionsProcessor(ss);
         return processor.parseAgr(args);
     }
-    
+
     /**
      * 命令行客户端执行入口
      *
@@ -154,10 +154,10 @@ public class CQLClient
                System.exit(ERROR_EXIT_CODE);
             }
         }
-        
+
         return readConconsole();
     }
-    
+
     private int readConconsole()
         throws IOException
     {
@@ -166,14 +166,14 @@ public class CQLClient
         //这样就可以支持'!='这样的输入了。
         reader.setExpandEvents(false);
         reader.setCopyPasteDetection(true);
-        
+
         String line;
         int ret = 0;
         String prefix = "";
         printHelp();
-        
+
         String tip = DEFAULT_CLI_TIP;
-        
+
         while ((line = reader.readLine(tip)) != null)
         {
             tip = WAITING_INPUT_TIP;
@@ -181,12 +181,12 @@ public class CQLClient
             {
                 prefix += '\n';
             }
-            
+
             if (line.trim().startsWith("--"))
             {
                 continue;
             }
-            
+
             if (line.trim().endsWith(";") && !line.trim().endsWith("\\;"))
             {
                 line = prefix + line;
@@ -202,7 +202,7 @@ public class CQLClient
         }
         return ret;
     }
-    
+
     private int processLine(String line)
     {
         int lastRet = 0;
@@ -214,7 +214,7 @@ public class CQLClient
             {
                 continue;
             }
-            
+
             if (StringUtils.endsWith(oneCmd, "\\"))
             {
                 command += StringUtils.chop(oneCmd) + ";";
@@ -224,35 +224,35 @@ public class CQLClient
             {
                 command += oneCmd;
             }
-            
+
             if (StringUtils.isBlank(command))
             {
                 continue;
             }
-            
+
             ret = processCQL(command, true);
             lastRet = ret;
         }
         return lastRet;
     }
-    
+
     private int processFile(String file)
         throws CQLException
     {
         LOG.debug("start to process cql file {}", file);
         List<String> sqls = CQLUtils.readCQLsFromFile(file);
-        
+
         validateCQLFile(sqls);
-        
+
         int ret = 0;
         for (int i = 0; i < sqls.size(); i++)
         {
             ret = processCQL(sqls.get(i), false);
         }
-        
+
         return ret;
     }
-    
+
     private void validateCQLFile(List<String> sqls)
         throws CQLException
     {
@@ -263,12 +263,12 @@ public class CQLClient
             {
                 CQLException exception = new CQLException(ErrorCode.TOP_ONE_FILE_ONE_TOP);
                 LOG.error("Syntax error, too many submit clause.", exception);
-                
+
                 throw exception;
             }
         }
     }
-    
+
     private int processCQL(String cql, boolean isConsole)
     {
         String cmdTrimmed = cql.trim();
@@ -277,17 +277,17 @@ public class CQLClient
             ss.close();
             System.exit(0);
         }
-        
+
         if (driver == null)
         {
             driver = new Driver();
         }
-        
+
         try
         {
             driver.run(cql);
             printHeader();
-            printResult();           
+            printResult();
         }
         catch (CQLException e)
         {
@@ -311,10 +311,10 @@ public class CQLClient
                 System.exit(1);
             }
         }
-        
+
         return 0;
     }
-    
+
     private void printHeader()
     {
         CQLResult result = driver.getResult();
@@ -322,27 +322,27 @@ public class CQLClient
         {
             return;
         }
-        
+
         String[] heads = result.getHeads();
         if (heads == null || heads.length == 0)
         {
             return;
         }
-        
+
         this.ss.getOut().println(formatOutput(result.getFormatter(), heads));
         this.ss.getOut().flush();
     }
-    
+
     private String formatOutput(String formatter, Object[] output)
     {
         if (Strings.isNullOrEmpty(formatter))
         {
             return Joiner.on("    ,    ").join(output);
         }
-        
+
         return String.format(formatter, output);
     }
-    
+
     private void printResult()
     {
         CQLResult cqlresult = driver.getResult();
@@ -355,7 +355,7 @@ public class CQLClient
         {
             return;
         }
-        
+
         for (String[] heads : results)
         {
             if (heads == null || heads.length == 0)
@@ -366,18 +366,18 @@ public class CQLClient
         }
         this.ss.getOut().flush();
     }
-    
+
     private void printHelp()
     {
         ss.getInfo().println(" End CQL with ';' and end client with 'exit;' ");
         ss.getInfo().flush();
     }
-    
+
     /**
      * 在用户目录下创建临时文件.inputrc，用于屏蔽掉在suse环境下控制台打印警告信息
      * @throws IOException
      */
-    
+
     private void createTempFile()
     {
         String userHome =  System.getProperty("user.home");
