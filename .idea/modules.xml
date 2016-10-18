@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cql/cql.iml" filepath="$PROJECT_DIR$/cql/cql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cql-binary/stream-cql-bianry.iml" filepath="$PROJECT_DIR$/cql-binary/stream-cql-bianry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter/storm/stream-storm.iml" filepath="$PROJECT_DIR$/adapter/storm/stream-storm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/streamCQL.iml" filepath="$PROJECT_DIR$/streamCQL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/streaming/streaming-base.iml" filepath="$PROJECT_DIR$/streaming/streaming-base.iml" />
+    </modules>
+  </component>
+</project>
