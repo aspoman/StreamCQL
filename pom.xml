@@ -34,11 +34,10 @@
 
     <modules>
         <module>streaming</module>
-        <module>adapter/storm</module>
+        <!--<module>adapter/storm</module>-->
         <module>adapter/jstorm</module>
         <module>cql</module>
         <module>cql-binary</module>
-        <module>streaming</module>
     </modules>
 
     <properties>

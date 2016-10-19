@@ -37,7 +37,7 @@ import com.huawei.streaming.operator.FunctionOperator;
 import com.huawei.streaming.operator.FunctionStreamOperator;
 import com.huawei.streaming.operator.IRichOperator;
 import com.huawei.streaming.storm.*;
-import org.apache.thrift.TException;
+import org.apache.thrift7.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

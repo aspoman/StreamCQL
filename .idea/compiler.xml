@@ -24,7 +24,6 @@
         <processorPath useClasspath="true" />
         <module name="cql" />
         <module name="stream-cql-bianry" />
-        <module name="stream-storm" />
         <module name="streaming-base" />
       </profile>
     </annotationProcessing>
